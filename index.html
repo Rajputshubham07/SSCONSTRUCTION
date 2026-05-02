@@ -2143,31 +2143,45 @@
 
         startInterval();
 
-        // Contact Form Submission with Backend Integration
+        // Contact Form Submission with Web3Forms & Local Backend
         const contactForm = document.getElementById('quote-form');
         const formSuccess = document.getElementById('form-success');
 
         contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent page reload
+            e.preventDefault();
 
-            // Gather form data
             const formData = new FormData(contactForm);
             const data = Object.fromEntries(formData.entries());
+            
+            // WEB3FORMS CONFIGURATION
+            data.access_key = "b05eb262-cf45-45fc-b5d2-ebd5fc26b5c3";
+            data.subject = "New Inquiry from Shri Shyam Constructions Website";
+            data.from_name = "Website Contact Form";
 
             try {
-                // Send data to backend
-                const response = await fetch('http://localhost:3000/api/enquiries', {
+                // 1. Send to Email Service (Web3Forms) - Works on Vercel!
+                const emailResponse = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     },
                     body: JSON.stringify(data)
                 });
 
-                if (response.ok) {
+                const result = await emailResponse.json();
+
+                // 2. Send to Local Backend (Backup for local testing)
+                fetch('http://localhost:3000/api/enquiries', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                }).catch(() => console.log("Local server not running, skipping local save."));
+
+                if (result.success) {
                     // Show success message
                     formSuccess.style.display = 'block';
-                    formSuccess.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully. We will get back to you soon.';
+                    formSuccess.innerHTML = '<i class="fas fa-check-circle"></i> Thank you! Your message has been sent to our email. We will get back to you soon.';
                     formSuccess.className = 'form-message success';
 
                     // Reset form fields
@@ -2178,19 +2192,18 @@
                         formSuccess.style.display = 'none';
                     }, 5000);
                 } else {
-                    throw new Error('Failed to send message');
+                    throw new Error('Email service failed');
                 }
             } catch (error) {
-                console.error('Error submitting form:', error);
-                // Show error message
+                console.error('Error:', error);
                 formSuccess.style.display = 'block';
-                formSuccess.innerHTML = '<i class="fas fa-exclamation-circle"></i> Sorry, there was an error sending your message. Please try again later.';
+                formSuccess.innerHTML = '<i class="fas fa-exclamation-circle"></i> Sorry, something went wrong. Please try again or call us directly.';
                 formSuccess.className = 'form-message error';
-
-                // Keep the error visible for a bit longer
+                
+                // Hide error message after 5 seconds
                 setTimeout(() => {
                     formSuccess.style.display = 'none';
-                }, 7000);
+                }, 5000);
             }
         });
     </script>
