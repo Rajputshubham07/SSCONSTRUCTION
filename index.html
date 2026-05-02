@@ -345,22 +345,28 @@
         }
 
         .logo {
-            font-family: 'Poppins', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--primary-navy);
             display: flex;
             align-items: center;
-            gap: 10px;
         }
 
-        .logo span {
-            color: var(--accent-gold);
+        .logo img {
+            height: 130px; /* Larger logo for desktop */
+            width: auto;
+            object-fit: contain;
+            transition: var(--transition);
         }
 
-        .logo i {
-            color: var(--accent-gold);
-            font-size: 2rem;
+        .navbar.scrolled .logo img {
+            height: 90px; /* Slightly smaller when scrolled */
+        }
+
+        @media (max-width: 768px) {
+            .logo img {
+                height: 100px; /* Responsive size for mobile */
+            }
+            .navbar.scrolled .logo img {
+                height: 70px;
+            }
         }
 
         .nav-links {
@@ -1379,9 +1385,8 @@
     <!-- Navbar -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo" style="display: flex; align-items: center;">
-                <img src="logo png.png" alt="Shri Shyam Constructions Logo"
-                    style="height: 70px; width: auto; object-fit: contain;">
+            <a href="#" class="logo">
+                <img src="logo png.png" alt="Shri Shyam Constructions Logo">
             </a>
             <div class="hamburger" id="hamburger">
                 <i class="fas fa-bars"></i>
@@ -1538,7 +1543,7 @@
     <section class="projects section-padding" id="projects">
         <div class="container">
             <div class="section-header fade-in-section">
-                <h2>Our Recent Work</h2>
+                <h2>Work in Progerss</h2>
                 <p>Take a look at some of our finest completed projects showcasing our commitment to excellence.</p>
             </div>
 
@@ -1866,7 +1871,7 @@
                 <div>
                     <a href="#" class="footer-logo" style="display: inline-block;">
                         <img src="logo.jpeg" alt="Shri Shyam Constructions Logo"
-                            style="height: 100px; width: auto; object-fit: contain;">
+                            style="height: 150px; width: auto; object-fit: contain;">
                     </a>
                     <div class="footer-about">
                         <p>Building Dreams, Delivering Excellence. We are a premier construction company dedicated to
