@@ -324,7 +324,7 @@
         /* Navbar */
         .navbar {
             background-color: rgba(255, 255, 255, 0.95);
-            padding: 20px 0;
+            padding: 10px 0;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -334,7 +334,7 @@
         }
 
         .navbar.scrolled {
-            padding: 12px 0;
+            padding: 5px 0;
             background-color: rgba(255, 255, 255, 0.98);
         }
 
@@ -350,16 +350,16 @@
         }
 
         .logo img {
-            height: 130px;
-            /* Larger logo for desktop */
+            height: 160px;
+            /* Big banner logo for desktop */
             width: auto;
             object-fit: contain;
             transition: var(--transition);
         }
 
         .navbar.scrolled .logo img {
-            height: 90px;
-            /* Slightly smaller when scrolled */
+            height: 80px;
+            /* Compact when scrolled */
         }
 
         @media (max-width: 768px) {
@@ -371,11 +371,11 @@
             }
 
             .logo img {
-                height: 120px;
-                /* Banner-like size for mobile */
+                height: 140px;
+                /* Big banner logo for mobile */
                 width: auto;
-                max-width: 90%;
-                /* Ensure it fits but fills space */
+                max-width: 95%;
+                /* Fill the header space properly */
             }
 
             .hamburger {
