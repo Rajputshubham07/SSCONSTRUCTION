@@ -361,11 +361,28 @@
         }
 
         @media (max-width: 768px) {
+            .nav-container {
+                justify-content: center; /* Center the logo */
+                position: relative;
+                padding: 10px 0;
+            }
             .logo img {
-                height: 100px; /* Responsive size for mobile */
+                height: 120px; /* Banner-like size for mobile */
+                width: auto;
+                max-width: 90%; /* Ensure it fits but fills space */
+            }
+            .hamburger {
+                position: absolute;
+                right: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                display: block; /* Ensure it's shown */
             }
             .navbar.scrolled .logo img {
-                height: 70px;
+                height: 80px;
+            }
+            .navbar.scrolled .nav-container {
+                padding: 5px 0;
             }
         }
 
